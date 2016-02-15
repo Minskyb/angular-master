@@ -1,0 +1,35 @@
+{
+	"menu":{
+		"system.home":" 主页 ",
+
+		"system.invest":"配资杠杠",
+		"system.invest.yhzc":"优惠政策",
+		"system.invest.szgk":"深圳概况",
+		"system.invest.hztg":"合作推广",
+		"system.invest.wqal":"往期案例",
+
+		"system.park":"公募基金",
+		"system.park.zdyq":"重点园区",
+		"system.park.yqfw":"园区服务",
+
+		"system.service":"私募基金",
+		"system.service.jrfw":"金融服务",
+		"system.service.rcfw":"人才服务",
+		"system.service.czfw":"财政服务",
+		"system.service.flfw":"法律服务",
+		"system.service.hyfw":"会员服务",
+
+		"system.zhongcou":"众筹",
+		"system.activity.hdjl":"活动记录",
+		"system.activity.zzjx":"正在进行",
+
+		"system.about":"关于我们",
+		"system.about.zongzhi":"宗旨",
+		"system.about.rwfc":"人物风采",
+		"system.about.lxwm":"联系我们"
+	},
+	"title":{
+		"publish.date":"发布时间",
+		"news.from":"来源"
+	}
+}

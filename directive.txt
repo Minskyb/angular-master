@@ -1,0 +1,6 @@
+启动服务：
+forever start -l forever.log -a nodeServer.js
+停止服务：
+forever stop nodeServer.js
+显示当前运行的服务：
+forever list

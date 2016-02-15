@@ -1,0 +1,32 @@
+table.table thead .sorting {
+  background: url('../../images/sort_both.png') no-repeat center right;
+}
+table.table thead .sorting_asc {
+  background: url('../../images/sort_asc.png') no-repeat center right;
+}
+table.table thead .sorting_desc {
+  background: url('../../images/sort_desc.png') no-repeat center right;
+}
+table.table thead .sorting,
+table.table thead .sorting_asc,
+table.table thead .sorting_desc,
+table.table thead .sorting_asc_disabled,
+table.table thead .sorting_desc_disabled {
+  cursor: pointer;
+  *cursor: hand; /*support ie5-*/
+}
+td.td-inline label{
+  display: inline;
+}
+td.td-inline label[for]{
+  float:left;
+}
+td.td-inline .form-control{
+  display: inline-block;
+  width: 80%;
+}
+td.td-inline img{
+  width:224px;
+  height:133px;
+  margin-left:10px;
+}

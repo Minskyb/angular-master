@@ -1,0 +1,12 @@
+<div class="container">
+	<section class="dz-border row" style="width:24%;float:left;margin-top:40px;" role="complementary">
+		<nav class="dz-nav"> 
+			<ul style="list-style: none">
+				<li ng-repeat="menu in Global.branchs.currentbranch.child" ng-click="changeMenu(menu)" ng-class="{'active':menu.href == Global.currentMenu}">
+					<a ng-href="{{menu.href}}" translate="menu.{{menu.route}}"></a>
+				</li>
+			</ul>
+		</nav>
+	</section>
+	<section class="dz-border" style="width:75%;float:right;margin-top:40px;" ui-view></section>
+</div>	

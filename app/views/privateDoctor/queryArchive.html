@@ -1,0 +1,32 @@
+<div>
+  <div ng-show="status.currentView=='family'">
+    <form class="form-inline" id="searchArchiveForm">
+      <div class="form-group">
+        <label for="name">姓名：</label>
+        <input type="text" id="name" name="name" class="form-control"  placeholder="" >
+      </div>
+      <div class="form-group">
+        <label for="create_time_pre">起始日期：</label>
+        <input  type="text" placeholder="" class="form-control datepicker" id="create_time_pre" name="create_time_pre" >
+      </div>
+      <div class="form-group">
+        <label for="create_time_aft" >结束日期：</label>
+        <input  type="text"  class="form-control datepicker" id="create_time_aft"  name="create_time_aft" >
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary" ng-click="searchArchive()">搜索</button>
+      </div>
+    </form>
+    <div simple-table data="archiveTable" ></div>
+  </div>
+  <div ng-show="status.currentView=='record'">
+    <div class="header">
+      <a style="font-size: 30px;float: left;" href="javascript:void(0)" ng-click="status.currentView='family';searchArchive();">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      </a>
+      <h3 style="text-align: center">家庭电话：{{status.linkphone}}</h3>
+    </div>
+    <div simple-table data="recordTable"></div>
+  </div>
+</div>

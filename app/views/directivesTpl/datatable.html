@@ -1,0 +1,21 @@
+
+<table class="table table-striped table-bordered table-hover" style="margin: 1em 0">
+  <thead>
+  <tr>
+    <th ng-repeat="header in data.headers" ng-hide="!!header.hidden"  ng-class="{'sorting':header.sort ,'sorting_asc':header.sortState==1,'sorting_desc':header.sortState==-1}" ng-click="sort($index,header.sort)">{{header.name}}</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="row in data.bodyData" data-row="{{$index}}" >
+    <td ng-repeat="col in row" ng-hide="!!data.headers[$index].hidden">
+      <a ng-if="!!data.subData && $index ==0" href="" ><span id="{{col.v}}" class="glyphicon ng-scope glyphicon-plus" aria-hidden="true"  ng-click="toggleSub($event)">&nbsp;</span></a>
+      <a ng-if="data.headers[$index].colType=='modal' && !!config.modalId" type="button" data-toggle="modal" data-target="{{'#'+config.modalId}}" ng-click="setRow($event)" href="javascript:void(0)">{{col.v}}</a>
+      <a ng-if="data.headers[$index].colType=='editHandler'" ng-show="!col.editState" ng-click="editRow($event,col)">编辑</a>
+      <a ng-if="data.headers[$index].colType=='editHandler'" ng-show="col.editState" ng-click="editRowEnsure($event,col)">确定</a>
+      <a ng-if="data.headers[$index].colType=='editHandler'" ng-show="col.editState" ng-click="editRowCancel($event,col)">取消</a>
+      <input ng-if="data.headers[$index].colType=='textEdit'" type="text" class="form-control" ng-if="data.headers[$index].colType=='text'|| !data.headers[$index].colType" value="{{col.v}}">
+      <span ng-if="data.headers[$index].colType=='text'|| !data.headers[$index].colType">{{col.v}}</span>
+    </td>
+  </tr>
+  </tbody>
+</table>

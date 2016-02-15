@@ -1,0 +1,53 @@
+<style>
+   .ykb-login{
+     width: 440px;
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     margin: -160px 0 0 -200px;
+   }
+  .ykb-login header{
+    text-align: center;
+  }
+  .ykb-login button.submit{
+    width: 100%;
+  }
+</style>
+
+  <form class="form-horizontal ykb-login" name='loginForm' novalidate ng-submit="loginSubmit()" ng-keyup="keyUp($event)">
+    <div class="panel panel-default">
+      <div class="panel-heading ">
+        <header><h3>有康诊所总后台</h3></header>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label for="username" class="col-sm-2 control-label">账户：</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="username" placeholder="账户" ng-model="loginState.username">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password" class="col-sm-2 control-label">密码：</label>
+          <div class="col-sm-9">
+            <input type="password" class="form-control" id="password" placeholder="密码" ng-model="loginState.password">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="checkbox col-sm-offset-2 col-sm-9">
+            <label>
+              <input type="checkbox" ng-model="loginState.rememberMe"> 记住密码
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-9">
+             <button type="submit" id="login" class="btn btn-danger submit" ng-disabled="loginState.clickedOne"><span class="ykb-font-18"> 登 录 </span></button>
+          </div>
+        </div>
+        <div class="alert alert-danger ykb-text-ellipsis" ng-show="loginState.loginFailed">
+          <button type="button" class="close" ng-click="loginState.loginFailed=false"><span aria-hidden="true">&times;</span></button>
+          {{loginState.errorMsg}}
+        </div>
+      </div>
+    </div>
+  </form>

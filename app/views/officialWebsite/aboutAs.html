@@ -1,0 +1,38 @@
+<style>
+  .aboutAs>.title{display: block;font-size: 18px;font-weight: bold;line-height: 30px;text-align: center;padding:20px 0;border: 1px solid #ccc;border-bottom-left-radius: 6px;border-bottom-right-radius:6px; }
+
+  #editor{height: 250px;border: 1px solid grey;border-radius: 6px;padding: 20px;}
+  .content.aboutAs>.box{width: 270px;height: 208px;}
+</style>
+<div>
+  <!-- 图片-->
+  <div class="header" style="font-size: 18px;font-weight: bold;padding-bottom: 5px;">公司介绍图：<span style="color: red;font-size: 14px;">图片建议大小：270px * 208px</span><span style="color: #808080;font-size: 14px;margin-left: 10px;">图片次序：医生团队、市场营销团队、技术研发团队、SEO推广团队</span></div>
+  <div class="content aboutAs">
+    <div class="box shade" ng-repeat="us in aboutUs">
+      <img ng-src="{{us.url}}">
+      <div class="shade-background shade-fade"></div>
+      <div class="shade-content shade-fade">
+        <div class="content">
+          <button class="btn btn-primary" ng-click="newSort(us,1)">升↑</button>
+          <button class="btn btn-primary" ng-click="newSort(us,2)">降↓</button>
+          <button class="btn btn-danger" ng-click="deleteSlider(us)">删除</button>
+        </div>
+      </div>
+    </div>
+    <div class="box box-add"><input type="file" onchange="angular.element(this).scope().addSlider(event,3)"></div>
+    <div class="box box-handle"><button class="btn btn-warning"> 预览 </button><button class="btn btn-primary"> 发布到正式 </button></div>
+  </div>
+<!-- 文案 -->
+  <div class="header" style="font-size: 18px;font-weight: bold;padding-bottom: 5px;margin-top: 20px;">公司介绍文案：</div>
+    <form>
+      <div class="form-group col-md-12">
+        <div id="editor" contenteditable="true" style="width: 50%;"></div>
+        <div class="box box-handle" style="margin-left: 0;">
+          <button class="btn btn-primary" ng-click="uploadText()"> 上传 </button>
+          <button class="btn btn-danger" ng-click="clearText()"> 重置 </button>
+          <button class="btn btn-warning"> 预览 </button>
+          <button class="btn btn-primary"> 发布到正式 </button></div>
+      </div>
+    </form>
+
+</div>

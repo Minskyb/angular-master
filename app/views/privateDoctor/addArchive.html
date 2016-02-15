@@ -1,0 +1,183 @@
+<style>
+  .form-horizontal label{text-align: right;}
+  .ellipsis{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .add-file{width: 170px;height: 190px;display: inline-block !important;cursor:pointer;position: relative;}
+  .add-file:before{content:"";display:inline-block;background: url("images/addfile.png") no-repeat;width: 170px;height: 190px;position: absolute;z-index: 10;}
+  .family-file{display: inline-block;float: left;text-align: center;width: 170px;height: 190px; background-color: #F1A417;border: 10px solid white;border-radius: 30px;color: #fafbfc;position: relative;}
+  .family-file>.family-file-name{overflow-wrap: break-word;width: 120px;margin: 20px auto;text-align: left;}
+
+  .family-file>.family-file-mark{position: absolute;top:160px;left:-10px;width: 170px;height: 190px;border: 10px solid white;border-radius: 30px;opacity: 0;background-color: #808080;transition: top 0.5s}
+  .family-file:hover>.family-file-mark {opacity:0.5;top: -10px;}
+  .family-file>.family-file-mark>.delete{position: absolute;bottom:0;left: 50%;margin-left: -24px;z-index: 200;border-bottom-left-radius: 0;border-bottom-right-radius: 0}
+</style>
+<div>
+<!--  <form class="form-inline" id="searchForm">
+    <div class="form-group">
+      <label for="name">姓名：</label>
+      <input type="text" name="name" id="name" class="form-control" ng-model="searchForm.name">
+    </div>
+    <div class="form-group">
+      <label for="address">家庭地址：</label>
+      <input type="text" name="address" id="address" class="form-control" ng-model="searchForm.address">
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary">查询</button>
+      <button class="btn btn-warning" data-toggle="modal" data-target="#archiveEditModal">新增档案</button>
+    </div>
+  </form>
+  <div simple-table data="archivesTable"></div>-->
+
+  <div>
+    <form class="form-horizontal" id="archiveForm" name="archiveForm" novalidate >
+      <div class="form-group">
+        <label class="col-sm-2 ellipsis" title="姓名">姓名</label>
+        <div class="col-sm-2">
+          <input type="text" name="name"  ng-model="archiveEditForm.name" class="form-control" required>
+        </div>
+        <div class="text-danger" ng-show="archiveForm.name.$dirty && archiveForm.name.$invalid">
+          <small class="text-danger">You name is required</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 ellipsis" title="性别">性别</label>
+        <div class="col-sm-10">
+          <label><input type="radio" name="sex" value="1" ng-model="archiveEditForm.sex">男</label>
+          <label><input type="radio" name="sex" value="2" ng-model="archiveEditForm.sex">女</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 ellipsis" title="birthday">出生日期</label>
+        <div class="col-sm-3">
+          <input type="text" name="birthday"  ng-model="archiveEditForm.birthday" class="form-control" placeholder="时间格式：YYYY-MM-DD">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 ellipsis" title="linkphone">电话号码</label>
+        <div class="col-sm-2">
+          <input type="text" ng-pattern="/^\d{11}$/" name="linkphone" id="linklinkphone"  ng-model="archiveEditForm.linkphone" class="form-control" ng-blur="judgePhone()">
+        </div>
+        <div class="text-danger" ng-show="archiveForm.linkphone.$dirty && archiveForm.linkphone.$invalid">
+          <small class="text-danger">请输入正确的手机号码，位数必须为 11 位。</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 ellipsis" title="profession">工作岗位</label>
+        <div class="col-sm-4">
+          <input type="text" name="profession"  ng-model="archiveEditForm.profession" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 ellipsis" title="create_doctor">建档医生</label>
+        <div class="col-sm-2">
+          <input type="text" name="create_doctor"  ng-model="archiveEditForm.create_doctor" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 ellipsis" title="create_time">建档日期</label>
+        <div class="col-sm-3">
+          <input type="text" name="create_time"  ng-model="archiveEditForm.create_time" class="form-control" placeholder="时间格式：YYYY-MM-DD">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 ellipsis" title="user_problems">当前健康问题</label>
+        <div class="col-sm-10">
+          <textarea name="user_problems" ng-model="archiveEditForm.user_problems" class="form-control"></textarea>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 ellipsis" title="medical_report_text">体检记录</label>
+        <div class="col-sm-10">
+          <textarea type="text" name="medical_report_text"  ng-model="archiveEditForm.medical_report_text" class="form-control"></textarea>
+        </div>
+        <div class="col-sm-offset-2 col-sm-10">
+<!--          <span class="family-file" data-file="1111">
+            <label class="family-file-name">111111111111111111111111111.png</label>
+            <div class="family-file-mark">
+              <button class="btn btn-danger delete" style="">删除</button>
+            </div>
+          </span>-->
+          <input type="file" class="add-file" id="medical_report_file"  multiple="multiple" name="family_file" onchange="angular.element(this).scope().uploadFamilyFile(this)">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 ellipsis" title="past_text">过往病历</label>
+        <div class="col-sm-10">
+          <textarea type="text" name="past_text"  ng-model="archiveEditForm.past_text" class="form-control"></textarea>
+        </div>
+        <div class="col-sm-offset-2 col-sm-10">
+          <input type="file" class="add-file" id="past_file"  multiple="multiple" name="family_file" onchange="angular.element(this).scope().uploadFamilyFile(this)">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 ellipsis" title="family_past_text">家庭病史</label>
+        <div class="col-sm-10">
+          <textarea type="text" name="family_past_text"  ng-model="archiveEditForm.family_past_text" class="form-control"></textarea>
+        </div>
+        <div class="col-sm-offset-2 col-sm-10">
+          <input type="file" class="add-file" id="family_past_file"  multiple="multiple" name="family_file" onchange="angular.element(this).scope().uploadFamilyFile(this)">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 ellipsis" title="health_goal">健康目标</label>
+        <div class="col-sm-10">
+          <textarea type="text" name="health_goal"  ng-model="archiveEditForm.health_goal" class="form-control"></textarea>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 ellipsis" title="doctor_suggestions">医生建议</label>
+        <div class="col-sm-10">
+          <textarea type="text" name="doctor_suggestions"  ng-model="archiveEditForm.doctor_suggestions" class="form-control"></textarea>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 ellipsis" title="home_visit_doctor">家访医生</label>
+        <div class="col-sm-2">
+          <input type="text" name="home_visit_doctor"  ng-model="archiveEditForm.home_visit_doctor" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 ellipsis" title="home_visit_time">家访时间</label>
+        <div class="col-sm-3">
+          <input type="text" name="home_visit_time"  ng-model="archiveEditForm.home_visit_time" class="form-control" placeholder="时间格式：YYYY-MM-DD">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 ellipsis" title="record_personnel">记录人员</label>
+        <div class="col-sm-2">
+          <input type="text" name="record_personnel"  ng-model="archiveEditForm.record_personnel" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+          <button class="col-sm-3 btn btn-primary" ng-disabled="archiveForm.$invalid" ng-click="newArchiveSubmit()">保存</button>
+          <button class="col-sm-3 col-sm-offset-1 btn btn-warning" ng-click="resetFormStatus()">重置</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!--记录条目-->
+<!--  <ol class="col-sm-12">
+    <li class="col-sm-12">
+      <div class="input-group" style="display: inline-table">
+        <textarea  class="form-control" rows="2"></textarea>
+                <span class="input-group-btn">
+                  <button class="btn btn-danger" type="button" style=" height: 54px;">删除</button>
+                </span>
+      </div>
+    </li>
+    <li class="col-sm-12">
+      <div class="input-group" style="display: inline-table">
+        <textarea  class="form-control" rows="2"></textarea>
+                <span class="input-group-btn">
+                  <button class="btn btn-danger" type="button" style=" height: 54px;">删除</button>
+                </span>
+      </div>
+    </li>
+  </ol>-->
+  <!--添加记录条目-->
+<!--  <div class="col-sm-12">
+    <button class="btn btn-primary col-sm-offset-5">添加</button>
+  </div>-->
+
+</div>

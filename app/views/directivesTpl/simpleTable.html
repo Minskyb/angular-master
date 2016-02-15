@@ -1,0 +1,42 @@
+<table class="table table-striped table-bordered table-hover" style="margin: 1em 0">
+  <thead>
+  <tr>
+    <th ng-repeat="header in data.headers" ng-hide="!!header.hidden"  ng-class="{'sorting':header.sort ,'sorting_asc':header.sortState==1,'sorting_desc':header.sortState==-1}" ng-click="sort($index,header.sort)">{{header.name}}</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr  ng-repeat="row in data.bodyData" class="ng-scope" data-row="{{$index}}" id="row_{{$index}}" ng-click="clickedRow($index)" >
+    <td ng-repeat="col in row" ng-style="{width:data.headers[$index].width}" ng-hide="!!data.headers[$index].hidden">
+
+      <!--编辑列-->
+      <a ng-if="data.headers[$index].colType=='edit'" ng-show="!col.editState" ng-click="editRow($event,$index,col)">编辑</a>
+      <a ng-if="data.headers[$index].colType=='edit'" ng-show="col.editState" ng-click="editRowEnsure($event,$index,col)">确定</a>
+      <a ng-if="data.headers[$index].colType=='edit'" ng-show="col.editState" ng-click="editRowCancel($event,$index,col)">取消</a>
+
+      <!--link-->
+      <a ng-if="data.headers[$index].colType=='link'" ng-click="clickedLink($event,$index)" href="javascript:void(0)" ng-style="{color:data.headers[$index].color}">{{col.v}}</a>
+
+      <!--plus-->
+     <div ng-if="data.headers[$index].colType=='plus'">
+       <a href=""><span class="glyphicon glyphicon-plus" ng-click="toggleSub($event,$index,col)"  ng-class="{'glyphicon-plus':!col.minusState,'glyphicon-minus':col.minusState}" aria-hidden="true" >&nbsp;</span></a>
+       {{col.v}}
+     </div>
+
+      <!--custom_plus-->
+      <a ng-if="data.headers[$index].colType=='custom_plus'" ng-click="toggleSub($event,$index,col,true)" href="">{{col.v}}</a>
+
+      <!--trend-->
+      <span ng-if="data.headers[$index].colType=='trend'" ng-class="{'ykb-red':col.trend>0,'ykb-blue':col.trend<0}">{{col.v}}&nbsp;
+        <span class="glyphicon" ng-class="{'glyphicon-arrow-up':col.trend >0,'glyphicon-arrow-down':col.trend<0,'glyphicon-minus':col.trend==0}"></span>
+      </span>
+
+      <!--radio-->
+      <input type="radio" ng-if="data.headers[$index].colType=='radio'" name="radio" ng-click="clickedLink($event,$index)" ng-checked="col.v==data.headers[$index].charge">
+      <input type="checkbox" ng-if="data.headers[$index].colType=='checkbox'"  ng-click="clickedLink($event,$index)" ng-checked="col.v==data.headers[$index].charge">
+      <!--纯文本-->
+      <span ng-if="data.headers[$index].colType=='text'|| !data.headers[$index].colType">{{col.v}}</span>
+
+    </td>
+  </tr>
+  </tbody>
+</table>

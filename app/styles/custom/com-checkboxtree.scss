@@ -1,0 +1,73 @@
+
+.ykb-tree .ykb-plus1,
+.ykb-tree .ykb-minus1,
+.ykb-tree .ykb-empty{
+  display: inline-block;
+  width: 18px;
+  height:24px;
+}
+.ykb-tree .ykb-plus1{
+  background-image: url(../../images/tree/plus1.gif) ;
+  cursor: hand;
+  cursor:pointer;
+}
+.ykb-tree .ykb-minus1{
+  background-image: url(../../images/tree/minus1.gif);
+  cursor: hand;
+  cursor:pointer;
+}
+
+.ykb-tree .ykb-folderClosed,
+.ykb-tree .ykb-folderOpen,
+.ykb-tree .ykb-iconCheckedAll,
+.ykb-tree .ykb-iconPartChecked,
+.ykb-tree .ykb-iconUnCheck,
+.ykb-tree .ykb-leaf{
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin: 3px 0px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-position-x: center;
+  background-position-y: center;
+}
+.ykb-tree .ykb-folderClosed{
+  background-image: url(../../images/tree/folderClosed.gif);
+}
+.ykb-tree .ykb-folderOpen{
+  background-image: url(../../images/tree/folderOpen.gif);
+}
+.ykb-tree .ykb-iconCheckedAll{
+  /*margin-left: -3px;*/
+  background-image: url(../../images/tree/iconCheckedAll.gif);
+  cursor: hand;
+  cursor:pointer;
+}
+.ykb-tree .ykb-iconPartChecked{
+  /*margin-left: -3px;*/
+  background-image: url(../../images/tree/iconPartChecked.gif);
+  cursor: hand;
+  cursor:pointer;
+}
+.ykb-tree .ykb-iconUnCheck{
+  /*margin-left: -3px;*/
+  background-image: url(../../images/tree/iconUnCheck.gif);
+  cursor: hand;
+  cursor:pointer;
+}
+.ykb-tree .ykb-leaf{
+  background-image: url(../../images/tree/leaf.gif);
+}
+
+.ykb-row{
+  position: relative;
+}
+
+.ykb-tree .ykb-title{
+  display: inline-block;
+  position: absolute;
+  top: 3px;
+  height: 24px;
+  padding: 0 5px;
+}

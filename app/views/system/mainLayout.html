@@ -1,0 +1,46 @@
+<style>
+  .h_group{display: block;}
+  .h_group>.item{display: inline-block;padding:4px;}
+  .user_status_bar{text-align: right;padding: 0 20px;}
+  .user_status_bar>*{color: #ffffff;}
+  .user_status_bar>a:hover{;text-shadow: 0 0 3px #fff;text-decoration: none;}
+  .user_status_bar>a:hover>.circle{border: 1px solid #594d4a;box-shadow: 0 0 3px #fff;}
+  .circle{border-radius: 50%;padding: 5px;border: 1px solid #fff;}
+</style>
+
+
+<div>
+  <section class="bg-primary" style="margin-bottom:0;box-shadow: 0 0 5px #ccc;">
+   <div class="h_group user_status_bar">
+     <a class="item" href="javascript:void(0)" ng-click="showMessage()"><span class="glyphicon glyphicon-envelope circle"></span></a>
+     <a class="item" href="javascript:void(0)" ng-click="backToLogin()" title="点击注销本次登录"><span class="glyphicon glyphicon-user circle"></span>&nbsp{{Global.userinfo.user_name}}</a>
+   </div>
+  </section>
+  <section ng-include="'views/system/header.html'" style="border: 1px solid #f5f5f5;"></section>
+  <section class="col-sm-2">
+    <nav ng-include="'views/system/leftMenu.html'"></nav>
+  </section>
+  <section class="col-sm-10">
+    <article>
+      <header>
+        <ol class="breadcrumb" style="box-shadow: rgb(189, 189, 189) 0px 0px 10px 0px;">
+        <span>当前位置：</span>
+         <!-- 后期提供导航是，用 <a> 标签 -->
+         <!--  <li ><a href="">Home</a></li> -->
+          <li class="text-primary">诊所后台</li>
+           <!-- Global.currentSubMenu 有值时显示 -->
+          <li ng-if="!!Global.currentSubMenu" class="text-primary">{{Global.currentMenu}}</li>
+          <!-- Global.currentSubMenu 有值时隐藏 -->
+          <li ng-if="!!!Global.currentSubMenu" class="active">{{Global.currentMenu}}</li>
+          <!-- Global.currentSubMenu 有值时显示 -->
+          <li ng-if="!!Global.currentSubMenu" class="active">{{Global.currentSubMenu}}</li>
+        </ol>
+      </header>
+    </article>
+    <article class="panel panel-default">
+        <div class="panel-body" ui-view="" style="box-shadow: rgb(189, 189, 189) 0px 0px 10px 0px;">
+
+        </div>
+    </article>
+  </section>
+</div>

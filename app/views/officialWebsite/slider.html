@@ -1,0 +1,45 @@
+<style>
+  .slider>.box{width: 384px;height:152.8px;}
+  .product>.box{width: 346px;height: 346px;}
+
+  .shade-content>.content{display: block;width: 200px;text-align: center;}
+  .shade-content>.content>.btn{margin-right: 5px;}
+  .shade-content>.content>.btn:last-child{margin-right: 0px;}
+
+</style>
+<div>
+  <!-- banner -->
+  <div class="header" style="font-size: 18px;font-weight: bold;padding-bottom: 5px;">首页banner图：<span style="color: red;font-size: 14px;">图片建议大小：1920px * 764px</span></div>
+  <div class="content slider">
+    <div class="box shade" ng-repeat="slider in sliders">
+      <img ng-src="{{slider.url}}" >
+      <div class="shade-background shade-fade"></div>
+      <div class="shade-content shade-fade" >
+        <div class="content">
+          <button class="btn btn-primary" ng-click="newSort(slider,1)">升↑</button>
+          <button class="btn btn-primary" ng-click="newSort(slider,2)">降↓</button>
+          <button class="btn btn-danger" ng-click="deleteSlider(slider)">删除</button>
+        </div>
+      </div>
+    </div>
+    <div class="box box-add"><input type="file" class="add-file" onchange="angular.element(this).scope().addSlider(event,1)"></div>
+    <div class="box box-handle"><button class="btn btn-warning"> 预览 </button><button class="btn btn-primary"> 发布到正式 </button></div>
+  </div>
+  <!-- 产品 -->
+  <div class="header" style="font-size: 18px;font-weight: bold;padding-bottom: 5px;">首页产品介绍图：<span style="color: red;font-size: 14px;">图片建议大小：346px * 346px</span><span style="color: #808080;font-size: 14px;margin-left: 10px;">图片顺序为：个性化健康管理、智慧医疗产品、医疗APP</span></div>
+  <div class="content product">
+    <div class="box shade" ng-repeat="product in products">
+      <img ng-src="{{product.url}}" >
+      <div class="shade-background shade-fade"></div>
+      <div class="shade-content shade-fade" >
+        <div class="content">
+          <button class="btn btn-primary" ng-click="newSort(product,1)">升↑</button>
+          <button class="btn btn-primary" ng-click="newSort(product,2)">降↓</button>
+          <button class="btn btn-danger" ng-click="deleteSlider(product)">删除</button>
+        </div>
+      </div>
+    </div>
+    <div class="box box-add"><input type="file" onchange="angular.element(this).scope().addSlider(event,2)"></div>
+    <div class="box box-handle"><button class="btn btn-warning"> 预览 </button><button class="btn btn-primary"> 发布到正式 </button></div>
+  </div>
+</div>

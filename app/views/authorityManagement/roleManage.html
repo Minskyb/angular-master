@@ -1,0 +1,14 @@
+<style>
+  .ykb-border{border: 1px solid #cccccc;box-shadow:rgb(189, 189, 189) 0px 0px 10px 0px inset;border-radius: 5px;min-height: 500px; }
+  .ykb-clear-both:before,.ykb-clear-both:after{ content: " ";display: table;  }
+  .ykb-clear-both:after{ clear: both;  }
+
+</style>
+<div>
+  <div class="ykb-clear-both">
+    <div  class="col-sm-4 ykb-border editTree"><ul checkboxtree data="tree" is-checkbox="false" style="margin-top: 15px;"></ul></div>
+    <div class="col-sm-4"></div>
+    <div  class="col-sm-4 ykb-border checkboxTree" ng-show="checkboxTree"><ul checkboxtree data="tree2" is-checkbox="true"style="margin-top: 15px;"></ul></div>
+  </div>
+  <button ng-click="getChecked()">button</button>
+</div>

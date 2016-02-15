@@ -1,0 +1,1 @@
+forever start -o E:/ClinicBackSystem_Beta/log/out.log nodeServer.js

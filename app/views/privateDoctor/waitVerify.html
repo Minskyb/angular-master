@@ -1,0 +1,79 @@
+
+<div>
+  <!--筛选条件-->
+  <form class="form-inline" id="search_form">
+    <div class="form-group">
+      <label for="province">省份：</label>
+      <input type="text" id="province" name="province" class="form-control"  placeholder="省份/直辖市" ng-model="local.province">
+    </div>
+    <div class="form-group">
+      <label for="name">医生名称：</label>
+      <input  type="text" placeholder="doctor's name" class="form-control" id="name" name="name" ng-model="local.doctorName">
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" ng-click="query()">搜索</button>
+    </div>
+  </form>
+
+  <div simple-table data="dataTable"></div>
+
+  <!--modal 查看大图-->
+  <!--<button type="button" id="showBigPic" style="display: none" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#bigPicModal">大图</button>-->
+  <div class="modal fade" id="bigPicModal" tabindex="-1" role="dialog" aira-labelledby="bigPicModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <img ng-src="{{bigPic.src}}" style="width: 100%;height: 100%;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--modal 通过-->
+  <div class="modal fade" id="agreeModal" tabindex="-1" role="dialog" aira-labelledby="agreeModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">请选择医院及团队</h4>
+        </div>
+        <div class="modal-body">
+          <form class="" id="throughForm">
+            <div class="input-group" style="margin-bottom: 20px;">
+              <span class="input-group-addon">选择所属诊所:</span>
+              <select class="form-control" name="clinique_id" ng-model="throughForm.clinique_id" ng-options="clinic.clinique_id as clinic.clinique_name  for clinic in clinics" ng-change="changeHospital()">
+                <option>--</option>
+              </select>
+            </div>
+            <div class="input-group " style="margin-bottom: 20px;">
+              <span class="input-group-addon">分配医生团队:</span>
+              <select class="form-control" name="doctor_team_id" ng-model="throughForm.doctor_team_id" ng-options="team.doctor_team_id as team.doctor_team_name  for team in teams">
+                <option>--</option>
+              </select>
+            </div>
+            <button ng-click="throughVerify()" class="btn-warning btn" style="width: 100%">提交</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--modal 拒绝-->
+  <!--<button type="button" id="degree" style="display: none" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#degreeModal">拒绝</button>-->
+  <div class="modal fade" id="degreeModal" tabindex="-1" role="dialog" aira-labelledby="degreeModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">请写明拒绝原因</h4>
+        </div>
+        <div class="modal-body">
+          <form class="refuse_from">
+            <textarea class="form-control" rows="3" style="margin-bottom: 20px;" ng-model="refuseFrom.refuseReason" required></textarea>
+            <button ng-click="refuseVerify($event)" class="btn btn-warning" style="width: 100%;">提交</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

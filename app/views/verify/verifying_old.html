@@ -1,0 +1,31 @@
+
+<div>
+  <!--筛选条件-->
+  <form class="form-inline" id="search_form">
+    <div class="form-group">
+      <label for="province">省份：</label>
+      <input type="text" id="province" name="province" class="form-control"  placeholder="省份/直辖市" ng-model="local.province">
+    </div>
+    <div class="form-group">
+      <label for="name">医生名称：</label>
+      <input  type="text" placeholder="doctor's name" class="form-control" id="name" name="name" ng-model="local.doctorName">
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" ng-click="query()">搜索</button>
+    </div>
+  </form>
+
+  <div datatable data="local.dataTable" config="config" ></div>
+
+  <!--modal-->
+  <div class="modal fade" id="bigPicModal" tabindex="-1" role="dialog" aira-labelledby="bigPicModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <img ng-src="{{config.imgSrc}}" style="width: 100%;height: 100%;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

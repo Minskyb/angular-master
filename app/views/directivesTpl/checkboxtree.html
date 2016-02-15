@@ -1,0 +1,12 @@
+
+<ul class="ykb-tree">
+  <li class="ykb-row" ng-repeat="node in data">
+    <div>
+      <span class="ykb-empty" ng-class="{'ykb-minus1':node.child &&!!node.open,'ykb-plus1':node.child &&!!!node.open}" ng-click="node.open=!!!node.open"></span>
+      <span ng-if="isCheckbox=='true'" ng-class="{'ykb-iconUnCheck':!node.isChecked && !node.partChecked,'ykb-iconCheckedAll':node.isChecked,'ykb-iconPartChecked':node.partChecked}" ng-click="toggleCheck(node)"></span>
+      <span ng-class="{'ykb-leaf':!!!node.child,'ykb-folderClosed':node.child &&!!!node.open,'ykb-folderOpen':node.child &&!!node.open}"></span>
+      <span class="ykb-title">{{node.nodeName}} <a ng-if="isCheckbox=='false'" class="glyphicon glyphicon-plus-sign edit" ng-click="edit(node.nodeId)" href="javascript:void(0)" title="添加权限"></a></span>
+    </div>
+    <ul checkboxtree data="node.child" style="margin-left: 18px;" ng-show="node.open" is-checkbox ="{{isCheckbox}}"></ul>
+  </li>
+</ul>

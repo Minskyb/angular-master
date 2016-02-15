@@ -1,0 +1,35 @@
+<style type="text/css">
+	.dz-navbar li.active{
+		 border-bottom:3px solid #a90000;
+    	 background-color:#a90000;
+	}
+	.dz-navbar>li{
+		/*width: 110px;*/
+		/*text-align: center;*/
+		/*background:url(../images/nav_border.png) no-repeat righst center;*/
+		/*padding: 0 5px;*/
+	}
+</style>
+<div class="dz-navbar" ng-controller="navbarController">
+	<li ng-repeat="branch in Global.branchs.data " ng-class="{'dz-dropdownMenu':branch.child
+	                   ,'active':branch.url == Global.currentUrl}">
+		<a href="{{branch.href}}" ng-click="changeBranch(branch,branch.child[0])" translate="menu.{{branch.route}}"><span ng-if="branch.child">&nbsp<span class="caret"></span></span></a>
+		<ul ng-if="branch.child" class="dz-subMenu">
+			<li ng-repeat="menu in branch.child">
+				<a href="{{menu.href}}" ng-click="changeBranch(branch,menu)" translate="menu.{{menu.route}}"></a>
+			</li>
+		</ul>
+	</li>
+</div>
+<div class="dz-navbar" style="float:right">
+	<li class="dz-dropdownMenu" style="float:right">
+		<a><i>Language</i></a>
+		<ul class="dz-subMenu" >
+			<li>
+			 	<a href="javascript:void(0)" ng-click="changeLanguage('en')" id="english">English</a>
+			 	<a href="javascript:void(0)" ng-click="changeLanguage('zh_CN')">简体中文</a>
+			 	<a href="javascript:void(0)">Francis</a>
+			</li>
+		<ul>
+	</li>
+</div>

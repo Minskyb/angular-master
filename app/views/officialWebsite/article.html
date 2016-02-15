@@ -1,0 +1,38 @@
+<style>
+  #editor>.froala-element{height: 400px;}
+  .category{width: 200px !important;}
+</style>
+<div>
+  <form id="uploadForm" name="uploadForm" novalidate>
+    <div class="form-group col-sm-12">
+      <div class="input-group">
+        <span class="input-group-addon">新闻类型:</span>
+        <select  class="form-control category" name="category" ng-model="status.category_id" ng-options="category.id as category.name  for category in categories" ng-change="chooseCategory()">
+          <option>--</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group col-sm-12">
+        <input type="text" class="form-control" ng-model="status.category_title" placeholder="标题" style="width: 40%">
+    </div>
+    <div class="form-group col-sm-12">
+        <label style="color: red">*若为网络转载，请将链接复制至下方输入框</label>
+        <input type="url" name="links" ng-model="status.category_link"  class="form-control links" placeholder="内容链接" onblur="angular.element(this).scope().blur(this)"  style="width: 40%">
+        <div class="text-danger" ng-show="uploadForm.links.$dirty && uploadForm.links.$invalid">
+          <small class="text-danger">请输入有效URL地址</small>
+        </div>
+    </div>
+    <div class="form-group col-sm-12" id="content" >
+      <label style="color: red">*若为本地文档，请复制内容到下方输入框，并注意调整格式</label>
+     <div id="editor" style="width: 1100px;"></div>
+    </div>
+    <div class="form-group col-sm-12">
+      <div class="box box-handle" style="margin-left: 0px;">
+        <button class="btn btn-primary" ng-click="uploadNews()" ng-disabled="uploadForm.$invalid"> 上传 </button>
+        <button class="btn btn-danger"> 重置 </button>
+        <button class="btn btn-warning"> 预览 </button>
+        <button class="btn btn-primary"> 发布到正式 </button>
+      </div>
+    </div>
+  </form>
+</div>

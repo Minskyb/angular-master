@@ -1,0 +1,27 @@
+
+<div>
+  <div class="loading" ng-show="Global.loading"></div>
+  <div message="Global.messages" style="position: fixed;z-index: 1000;right: 5px;bottom: 10px;"></div>
+
+  <div ui-view>
+
+  </div>
+  <!--删除弹框-->
+  <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aira-labelledby="confirmModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header" style="text-align: center">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">{{Global.confirmModal.title}}</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <label class="">{{Global.confirmModal.content}}</label>
+            <button class="btn btn-warning" style="width: 100%;" ng-click="Global.confirmModal.action();hideConfirmModal()">提交</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

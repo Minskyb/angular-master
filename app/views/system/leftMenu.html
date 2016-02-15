@@ -1,0 +1,41 @@
+<style>
+ .nav-stacked > li a{
+    border: 1px solid #cccccc;
+  }
+  div>.nav-stacked{
+    box-shadow: rgb(189, 189, 189) 0px 0px 10px 0px;
+    border-radius: 5px;
+  }
+  .nav-stacked>li{
+    -webkit-transition: 0.6s;
+    transition: 0.6s;
+  }
+.nav-stacked>li.active{
+    margin-left: 8px;
+  }
+ .nav-stacked>li:hover{
+    margin-left: 8px;
+  }
+ .nav-stacked>li>.nav-stacked{
+   margin-left: 8px;
+ }
+</style>
+
+<div ng-controller="leftMenuController">
+  <ul class="nav nav-pills nav-stacked" >
+    <li role="presentation" ng-repeat="menu in menus"  ng-class="{'active':Global.currentMenu == menu.title}" ng-if="!!menu.role_id">
+      <a  ng-click="changeMenu(menu)" ui-sref="{{menu.route}}">
+        <span ng-if="menu.submenus.length>0" class="glyphicon" ng-class="{'glyphicon':true,'glyphicon-plus':!menu.showSubMenu,'glyphicon-minus':menu.showSubMenu}" aria-hidden="true"></span> {{menu.title}}
+      </a>
+      <!--sub menu-->
+      <ul ng-if="menu.child.length>0" class="nav nav-pills nav-stacked" ng-show="menu.showSubMenu">
+        <li ng-repeat="subMenu in menu.child" ng-if="!!subMenu.role_id"  role="presentation"    ng-class="{'active':Global.currentSubMenu == subMenu.title}">
+          <a  ui-sref="{{subMenu.route}}" ng-click="changeMenu(menu,subMenu)">{{subMenu.title}}</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+
+

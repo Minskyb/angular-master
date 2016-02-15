@@ -1,0 +1,141 @@
+<style>
+  #preview,
+  #preview>.img,
+  #preview>img{width: 170px;height: 170px;}
+
+  .add-mark{padding: 12px 6px;border: 1px solid #ccc;border-radius: 4px;box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;}
+
+
+</style>
+<div>
+  <!--医生团队列表-->
+  <div ng-show="status.currentView=='teams'">
+      <!--筛选条件-->
+        <form class="form-inline" id="searchTeamForm">
+          <div class="form-group">
+            <label for="province">诊所：</label>
+            <input type="text" id="province" name="province" class="form-control"  placeholder="" ng-model="local.province">
+          </div>
+          <div class="form-group">
+            <label for="name">医生团队：</label>
+            <input  type="text" placeholder="" class="form-control" id="name" name="name" ng-model="local.doctorName">
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary" ng-click="searchTeam()">搜索</button>
+          </div>
+          <button class="btn btn-warning" ng-click="status.isUpdate = false;showNewTeamModal();">新增医生团队</button>
+        </form>
+        <div simple-table data="teamsTable" ></div>
+  </div>
+
+  <!--医生团队成员列表-->
+  <div ng-show="status.currentView=='members'">
+    <div>
+      <a style="font-size: 30px;float: left;" href="javascript:void(0)" ng-click="status.currentView='teams';status.newDoctor=false;searchTeam();"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true" ></span></a>
+      <h3 style="text-align: center;">{{status.currentTeam}}</h3>
+    </div>
+    <div simple-table data="membersTable" ></div>
+
+    <!-- 新增医生 -->
+    <button class="btn-warning btn" style="margin-bottom: 14px;" ng-click="toggleAddDoctor()">添加医生</button>
+    <div ng-show="status.newDoctor">
+      <form class="form-inline" id="search_doctor">
+        <div class="form-group">
+          <label for="province">诊所：</label>
+          <input type="text" id="province2" name="province" class="form-control"  placeholder="" ng-model="local.province">
+        </div>
+        <div class="form-group">
+          <label for="name">医生名称：</label>
+          <input  type="text" placeholder="" class="form-control" id="name2" name="name" ng-model="local.doctorName">
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary" ng-click="searchDoctor()">搜索</button>
+        </div>
+      </form>
+      <div simple-table data="addDoctorTable" ></div>
+    </div>
+  </div>
+
+
+  <!--modal 成员更换团队-->
+  <div class="modal fade" id="changeTeamModal" tabindex="-1" role="dialog" aira-labelledby="changeTeamModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">请选择医院及团队</h4>
+        </div>
+        <div class="modal-body">
+          <form class="" id="changeTeamForm">
+            <div class="input-group" style="margin-bottom: 20px;">
+              <span class="input-group-addon">选择所属诊所:</span>
+              <select class="form-control" name="clinique_id" ng-model="changeTeamEdit.clinique_id" ng-options="clinic.clinique_id as clinic.clinique_name  for clinic in clinics" ng-change="changeHospital()">
+                <option>--</option>
+              </select>
+            </div>
+            <div class="input-group " style="margin-bottom: 20px;">
+              <span class="input-group-addon">分配医生团队:</span>
+              <select class="form-control" name="doctor_team_id" ng-model="changeTeamEdit.doctor_team_id" ng-options="team.doctor_team_id as team.doctor_team_name  for team in teams">
+                <option>--</option>
+              </select>
+            </div>
+            <button ng-click="changeSubmit()" class="btn-warning btn" style="width: 100%">提交</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--新增 修改 医生团队-->
+  <div class="modal fade" id="newTeamModal" tabindex="-1" role="dialog" aira-labelledby="newTeamModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">新增医生团队</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal" id="addDoctorTeamForm">
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="clinique_id">所属诊所</label>
+              <div class="col-sm-10" >
+                <select class="form-control" name="clinique_id" id="clinique_id" ng-model="doctorTeamEdit.clinique_id" ng-options="clinic.clinique_id as clinic.clinique_name for clinic in clinics ">
+                  <option>--</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="doctor_team_name">团队名称</label>
+              <div class="col-sm-10" ><input type="text" class="form-control" name="doctor_team_name" id="doctor_team_name" ng-model="doctorTeamEdit.doctor_team_name"></div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="department">接诊</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="department" id="department" placeholder="各种类以分号'；'分隔：内科；外科" ng-model="doctorTeamEdit.department">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="doctor_team_summary">团队介绍</label>
+              <div class="col-sm-10" > <textarea class="form-control col-sm-9" name="doctor_team_summary" id="doctor_team_summary" ng-model="doctorTeamEdit.doctor_team_summary"></textarea></div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="headimg">团队头像</label>
+              <div class="col-sm-10">
+                  <div id="preview" style="margin-bottom: 10px;">
+                    <img ng-src="{{status.currentImg}}">
+                  </div>
+                  <input type="file" name="headimg" id="headimg" accept="image/*" onchange="angular.element(this).scope().preview(this)">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <buton class="btn btn-primary col-sm-5" ng-click="submit()">保存</buton><button class="btn btn-warning col-sm-offset-2 col-sm-5" ng-click="cancel()">取消</button>
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

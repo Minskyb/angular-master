@@ -1,0 +1,58 @@
+<div>
+  <form class="form-inline" id="clinicSearchForm">
+    <div class="form-group">
+      <label for="clinic">诊所：</label><input type="text" placeholder="" name="clinicname" id="clinic" class="form-control">
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" ng-click="search()">搜索</button>
+    </div>
+    <button class=" btn btn-warning" ng-click="add()">新增诊所</button>
+  </form>
+  <div simple-table data="clinicTable"></div>
+
+
+  <div class="modal fade" id="newClinicModal" tabindex="-1" role="dialog" aria-labelledby="newClinicModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">新增诊所</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal" id="addClinicForm">
+            <div class="form-group" style="display: none;">
+              <label class="col-sm-2 control-label" for="clinique_id">诊所ID</label>
+              <div class="col-sm-10"><input type="text" id="clinique_id" name="clinique_id" ng-model="edit.clinique_id" class="form-control" required></div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="clinique_name">诊所名称</label>
+              <div class="col-sm-10"><input type="text" id="clinique_name" name="clinique_name" ng-model="edit.clinique_name" class="form-control" required></div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="clinique_address">所在地址</label>
+              <div class="col-sm-10"><input type="text" id="clinique_address" name="clinique_address" ng-model="edit.clinique_address" class="form-control" required></div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="linkman">联系人</label>
+              <div class="col-sm-10"><input type="text" id="linkman" name="linkman" ng-model="edit.linkman" class="form-control" placeholder="多个联系人以逗号 , 分隔" required></div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="linkphone">联系电话</label>
+              <div class="col-sm-10"><input type="text" id="linkphone" name="linkphone" ng-model="edit.linkphone" class="form-control" placeholder="多个联系电话以逗号 , 分隔" required></div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="describle">诊所描述</label>
+              <div class="col-sm-10"><textarea  id="describle" name="describle" ng-model="edit.describle"  class="form-control" required></textarea></div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn-primary col-sm-5" ng-click="submit()" >保存</button>
+                <button class="btn btn-warning col-sm-offset-2 col-sm-5" ng-click="cancel()" >取消</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
