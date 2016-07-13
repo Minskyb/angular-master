@@ -17,6 +17,7 @@ define([
 
       angularModule.config(function($httpProvider){
         $httpProvider.defaults.headers.post['Content-Type'] = "application/x-www-form-urlencoded;charset=UTF-8";
+        $httpProvider.defaults.headers.common['Version'] = '1.0.0';
         //$httpProvider.defaults.headers.post['Content-Type'] = "multipart/form-data";
       });
 

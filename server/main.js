@@ -9,8 +9,8 @@ var path = require('path');
 var http = require('http');
 var httpHelper = require('./util/httpHelper')
 
-//var vhost = 'http://120.25.66.245:80';
-var vhost = 'http://192.168.20.16:80';
+var vhost = 'http://120.25.66.245:80';
+//var vhost = 'http://192.168.20.16:80';
 //var vhost = 'http://192.168.20.15:3030';
 //var vhost = 'http://192.168.20.237:80';
 

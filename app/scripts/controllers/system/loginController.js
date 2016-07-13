@@ -79,14 +79,14 @@ define(['MD5'],function(MD5){
     /*
     * 模拟登录
     * */
-    //if($scope.loginState.username =="demo" && $scope.loginState.password =="demo" ){
+    // if($scope.loginState.username =="demo" && $scope.loginState.password =="demo" ){
     //  $scope.Global.currentMenu = '医生搜索';
     //  $scope.Global.currentSubMenu ="";
     //  $state.go("system.clinic.searchDoctor");
-    //}
-    //else{
+    // }
+    // else{
     //  $scope.loginState.loginFailed = true;
-    //}
+    // }
 
     //监听键盘点击事件
     $scope.keyUp = function($event){
